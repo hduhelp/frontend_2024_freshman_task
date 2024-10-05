@@ -59,9 +59,14 @@ onMounted(() => {
               <v-row>
                 <v-col>
                   <!-- Where Components Insert -->
-                  <AvatarGetter :email="userData.email" size="64" />
-                  <div class="text">{{ userData.username }}</div>
-                  <div class="text">{{ userData.email }}</div>
+                  <template v-if="userData">
+                    <AvatarGetter :email="userData.email" size="64" />
+                    <div class="text">{{ userData.username }}</div>
+                    <div class="text">{{ userData.email }}</div>
+                  </template>
+                  <template v-else>
+                    <div>Loading user data...</div>
+                  </template>
                   <ProfileEditor />
                 </v-col>
               </v-row>

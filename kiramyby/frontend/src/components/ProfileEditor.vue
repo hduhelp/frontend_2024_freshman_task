@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 
 // form status
@@ -8,7 +8,7 @@ const profileForm = ref(null)
 
 // get userStore
 const userStore = useUserStore()
-const userData = ref(() => userStore.userData)
+const userData = computed(() => userStore.userData)
 
 const formData = ref({
   username: userData.value.username,
@@ -18,7 +18,7 @@ const formData = ref({
 // form rule
 const rules = {
   required: (value) => !!value || 'Required.',
-  email: (value) => /.+@.+\..+/.test(value) || 'E-mail must be valid.'
+  email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || 'E-mail must be valid.'
 }
 
 // form function
@@ -28,8 +28,8 @@ const saveForm = () => {
   if (profileForm.value.isValid) {
     dialog.value = false // close dialog
     userStore.setUserData({
-      username: formData.value.username,
-      email: formData.value.email
+      username: computed(() => userData.value.username),
+      email: computed(() => userData.value.email)
     })
   } else {
     alert('Form is invalid!')
