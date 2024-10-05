@@ -23,9 +23,8 @@ const submitQuestion = async () => {
     questionContent.value.author_email = userData.value.email
     questionContent.value.created_at = new Date().toISOString()
 
-    const response = await axios.post(`${API_BASE_URL}/api/question`, questionContent.value)
-    console.log('Question submitted:', response.data)
-    alert('Submit Complete!')
+    const response = await axios.post(`${API_BASE_URL}/question`, questionContent.value)
+    alert(`Submit Complete! Question ID = ${response.data.id}`)
     // reset content
     questionContent.value = {
       title: '',

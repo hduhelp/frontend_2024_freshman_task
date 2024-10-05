@@ -16,7 +16,6 @@ const answerContent = ref({
   created_at: '',
   author_email: '',
   author_name: '',
-  question_id: ''
 })
 
 const submitAnswer = async () => {
@@ -26,10 +25,9 @@ const submitAnswer = async () => {
     answerContent.value.created_at = new Date().toISOString()
 
     const response = await axios.post(
-      `${API_BASE_URL}/api/question/${props.id}/answer`,
+      `${API_BASE_URL}/question/${props.id}/answer`,
       answerContent.value
     )
-    console.log('Answer submitted:', response.data)
     alert(`Submit Complete! Answer ID = ${response.data.id}`)
     // reset content
     answerContent.value = {
