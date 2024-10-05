@@ -1,0 +1,65 @@
+<script setup>
+import AnswerCard from '@/components/AnswerCard.vue'
+import { computed, onMounted, ref } from 'vue'
+import axios from 'axios'
+import { useRoute } from 'vue-router'
+import QuestionCard from '@/components/QuestionCard.vue'
+
+const route = useRoute()
+
+const question = ref({
+  id: Number(),
+  title: '',
+  detail: '',
+  author: '',
+  created_at: '',
+  author_email: '',
+  answers: []
+})
+
+const answers = computed(() => question.value.answers)
+
+const fetchQuestionData = async (id) => {
+  try {
+    const response = await axios.get(`https://hduhelp.woshiluo.com/api/question/${id}`)
+    question.value = response.data
+  } catch (error) {
+    console.error('Error fetching question:', error)
+  }
+}
+
+onMounted(() => {
+  question.value.id = Number(route.params.id)
+  fetchQuestionData(question.value.id)
+})
+</script>
+
+<template>
+  <v-container>
+    <v-row>
+      <v-col>
+        <!-- Where Component Insert-->
+        <QuestionCard
+          :id="question.id"
+          :question="question.title"
+          :detail="question.detail"
+          :time="question.created_at"
+          :author="question.author"
+          :author_email="question.author_email"
+          :unsolved="answers.length === 0"
+          standard
+        >
+        </QuestionCard>
+        <AnswerCard
+          v-for="answer in answers"
+          :key="answer.id"
+          :id="answer.id"
+          :time="answer.created_at"
+          :author="answer.author_name"
+          :email="answer.author_email"
+          :content="answer.content"
+        ></AnswerCard>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
