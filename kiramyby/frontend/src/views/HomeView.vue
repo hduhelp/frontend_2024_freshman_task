@@ -3,39 +3,38 @@ import ProfileEditor from '@/components/ProfileEditor.vue'
 import QuestionCard from '@/components/QuestionCard.vue'
 import axios from 'axios'
 import { useUserStore } from '@/stores/userStore'
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import AvatarGetter from '@/components/AvatarGetter.vue'
 
-const questions = ref([
-  {
-    id: Number(),
-    title: '',
-    detail: '',
-    author: '',
-    created_at: '',
-    author_email: '',
-    answers: []
-  }
-])
-const currentPage = ref(1)
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
+const questions = ref([])
 const itemsPerPage = 10
+const currentPage = ref(1)
+const errorMessage = ref('')
 
 const userStore = useUserStore()
 const userData = computed(() => userStore.userData)
 
 const fetchQuestions = async () => {
   try {
-    const response = await axios.get('https://hduhelp.woshiluo.com/api/question')
+    const response = await axios.get(`${API_BASE_URL}/question`)
     questions.value = response.data
   } catch (error) {
+    errorMessage.value = 'Failed to load questions. Please try again later.'
     console.error('Error fetching questions:', error)
   }
 }
 
 // calc total pages
-const totalPages = computed(() => {
-  return Math.ceil(questions.value.length / itemsPerPage)
-})
+const totalPages = ref(0)
+watch(
+  () => questions.value.length,
+  (newLength) => {
+    totalPages.value = Math.ceil(newLength / itemsPerPage)
+  },
+  { immediate: true }
+)
 
 // questions in current page
 const currentQuestions = computed(() => {
@@ -51,6 +50,7 @@ onMounted(() => {
 
 <template>
   <v-container>
+    <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     <v-row>
       <v-col cols="12" md="3">
         <v-sheet id="sidebar" rounded="lg">
@@ -60,8 +60,8 @@ onMounted(() => {
                 <v-col>
                   <!-- Where Components Insert -->
                   <AvatarGetter :email="userData.email" size="64" />
-                  <v-sheet class="text"> {{ userData.username }} </v-sheet>
-                  <v-sheet class="text"> {{ userData.email }} </v-sheet>
+                  <div class="text"> {{ userData.username }} </div>
+                  <div class="text"> {{ userData.email }} </div>
                   <ProfileEditor />
                 </v-col>
               </v-row>

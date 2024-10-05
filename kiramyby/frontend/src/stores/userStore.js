@@ -9,13 +9,10 @@ export const useUserStore = defineStore('user', {
   }),
   actions: {
     setUserData(data) {
-      this.userData = data
+      this.userData = { ...this.userData, ...data }
     },
     clearUserData() {
-      this.userData = {
-        username: 'Guest',
-        email: ''
-      }
+      this.userData = this.$state.userData
     }
   },
   persist: {

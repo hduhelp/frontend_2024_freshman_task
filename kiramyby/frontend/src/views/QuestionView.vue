@@ -5,8 +5,10 @@ import axios from 'axios'
 import { useRoute } from 'vue-router'
 import QuestionCard from '@/components/QuestionCard.vue'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 const route = useRoute()
 
+const errorMessage = ref('')
 const question = ref({
   id: Number(),
   title: '',
@@ -21,10 +23,11 @@ const answers = computed(() => question.value.answers)
 
 const fetchQuestionData = async (id) => {
   try {
-    const response = await axios.get(`https://hduhelp.woshiluo.com/api/question/${id}`)
+    const response = await axios.get(`${API_BASE_URL}/question/${id}`)
     question.value = response.data
   } catch (error) {
     console.error('Error fetching question:', error)
+    errorMessage.value = 'Failed to load questions. Please try again later.'
   }
 }
 

@@ -18,11 +18,15 @@ const links = [
       </v-btn-group>
     </v-app-bar>
 
-    <v-main class="bg-grey-lighten-3">
+    <v-main>
       <!-- Where Views Insert -->
       <RouterView></RouterView>
     </v-main>
   </v-app>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-main {
+  background-color: rgb(241, 241, 241); /* bg-grey-lighten-3 */
+}
+</style>

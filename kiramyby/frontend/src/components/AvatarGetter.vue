@@ -3,14 +3,20 @@ import md5 from 'md5'
 import { computed } from 'vue'
 
 const props = defineProps({
-  email: String,
-  size: String
+  email: {
+    type: String,
+    required: true,
+  },
+  size: {
+    type: [Number, String],
+    default: 32
+  }
 })
 
 // get avatar from gravatar
 const getAvatar = computed(() => {
-  const encodeEmail = md5(props.email)
-  return `http://gravatar.com/avatar/${encodeEmail}?s=${props.size}`
+  const encodedEmail = md5(props.email.trim().toLowerCase())
+  return `https://secure.gravatar.com/avatar/${encodedEmail}?s=${props.size}`
 })
 </script>
 
