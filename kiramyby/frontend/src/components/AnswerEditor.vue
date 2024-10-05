@@ -1,42 +1,43 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore'
 import { ref, computed } from 'vue'
-import axios from 'axios';
+import axios from 'axios'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const userStore = useUserStore()
 const userData = computed(() => userStore.userData)
-
-const questionContent = ref({
-  title: '',
-  detail: '',
-  author: '',
-  created_at: '',
-  author_email: '',
-  answers: []
+const props = defineProps({
+  id: Number
 })
 
-const submitQuestion = async () => {
+const answerContent = ref({
+  content: '',
+  created_at: '',
+  author_email: '',
+  author_name: '',
+  question_id: ''
+})
+
+const submitAnswer = async () => {
   try {
-    questionContent.value.author = userData.value.username
-    questionContent.value.author_email = userData.value.email
-    questionContent.value.created_at = new Date().toISOString()
+    answerContent.value.author = userData.value.username
+    answerContent.value.author_email = userData.value.email
+    answerContent.value.created_at = new Date().toISOString()
 
     const response = await axios.post(
-      `${API_BASE_URL}/api/question`,
-      questionContent.value
+      `${API_BASE_URL}/api/question/${props.id}/answer`,
+      answerContent.value
     )
-    console.log('Question submitted:', response.data)
-    alert('Submit Complete!')
+    console.log('Answer submitted:', response.data)
+    alert(`Submit Complete! Answer ID = ${response.data.id}`)
     // reset content
-    questionContent.value = {
-      title: '',
-      detail: '',
-      author: '',
+    answerContent.value = {
+      content: '',
       created_at: '',
       author_email: '',
-      answers: []
+      author_name: '',
+      question_id: ''
     }
   } catch (error) {
     alert('Sry! Error occur. Please try again.')
@@ -67,18 +68,13 @@ const submitQuestion = async () => {
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col>
-          <v-text-field v-model="questionContent.title" label="Title" hide-details></v-text-field>
-        </v-col>
-      </v-row>
     </v-container>
   </v-form>
   <v-container fluid>
-    <v-textarea v-model="questionContent.detail" label="Content" counter auto-grow></v-textarea>
+    <v-textarea v-model="answerContent.content" label="Content" counter auto-grow></v-textarea>
     <div class="pa-4 text-end">
-      <v-btn prepend-icon="mdi-upload" color="deep-grey" variant="outlined" @click="submitQuestion"
-        >Ask Question</v-btn
+      <v-btn prepend-icon="mdi-upload" color="deep-grey" variant="outlined" @click="submitAnswer"
+        >Submit Answer</v-btn
       >
     </div>
   </v-container>

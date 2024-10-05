@@ -3,11 +3,17 @@ import AnswerCard from '@/components/AnswerCard.vue'
 import { computed, onMounted, ref } from 'vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
+import { useUserStore } from '@/stores/userStore'
 import QuestionCard from '@/components/QuestionCard.vue'
+import AvatarGetter from '@/components/AvatarGetter.vue'
+import ProfileEditor from '@/components/ProfileEditor.vue'
+import AnswerEditor from '@/components/AnswerEditor.vue'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 const route = useRoute()
+const userStore = useUserStore()
 
+const userData = computed(() => userStore.userData)
 const errorMessage = ref('')
 const question = ref({
   id: Number(),
@@ -62,6 +68,33 @@ onMounted(() => {
           :email="answer.author_email"
           :content="answer.content"
         ></AnswerCard>
+
+        <v-divider></v-divider>
+        <v-container fluid>
+          <v-card>
+            <v-card-text>
+              <v-sheet class="d-flex align-center justify-center">
+                <v-row>
+                  <v-col>
+                    <div class="text-center">
+                      <AvatarGetter :email="userData.email" size="48" />
+                    </div>
+                    <div class="text-center">{{ userData.username }}</div>
+                    <div class="text-center">{{ userData.email }}</div>
+                    <div class="text-center">
+                      <ProfileEditor />
+                    </div>
+                  </v-col>
+                </v-row>
+              </v-sheet>
+              <AnswerEditor :id="question.id"/>
+              
+            </v-card-text>
+            <template v-slot:prepend>
+              
+            </template>
+          </v-card>
+        </v-container>
       </v-col>
     </v-row>
   </v-container>
