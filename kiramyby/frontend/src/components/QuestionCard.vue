@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import AvatarGetter from './AvatarGetter.vue';
+import AvatarGetter from './AvatarGetter.vue'
 
 const props = defineProps({
   id: Number,
@@ -34,7 +34,7 @@ const summaryDetail = computed(() => {
         </v-card-title>
         <template v-slot:append>
           <v-icon v-if="!unsolved" icon="mdi-check"></v-icon>
-          <AvatarGetter :email="author_email" size="32"/>
+          <AvatarGetter :email="author_email" size="32" />
         </template>
         <v-card-subtitle>
           {{ `${author} ${formattedDate}` }}
@@ -52,7 +52,7 @@ const summaryDetail = computed(() => {
         </v-card-title>
         <template v-slot:append>
           <v-icon v-if="!unsolved" icon="mdi-check"></v-icon>
-          <AvatarGetter :email="author_email" size="32"/>
+          <AvatarGetter :email="author_email" size="32" />
         </template>
         <v-card-subtitle>
           {{ `${author} ${formattedDate}` }}

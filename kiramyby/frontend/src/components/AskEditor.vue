@@ -1,7 +1,7 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore'
 import { ref, computed } from 'vue'
-import axios from 'axios';
+import axios from 'axios'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -23,10 +23,7 @@ const submitQuestion = async () => {
     questionContent.value.author_email = userData.value.email
     questionContent.value.created_at = new Date().toISOString()
 
-    const response = await axios.post(
-      `${API_BASE_URL}/api/question`,
-      questionContent.value
-    )
+    const response = await axios.post(`${API_BASE_URL}/api/question`, questionContent.value)
     console.log('Question submitted:', response.data)
     alert('Submit Complete!')
     // reset content

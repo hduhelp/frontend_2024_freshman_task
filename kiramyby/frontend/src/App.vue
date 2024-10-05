@@ -10,9 +10,15 @@ const links = [
 <template>
   <v-app id="inspire">
     <v-app-bar class="px-3" density="comfortable">
-      <v-app-bar-title >Q&A Platform</v-app-bar-title>
+      <v-app-bar-title>Q&A Platform</v-app-bar-title>
       <v-btn-group>
-        <v-btn v-for="link in links" :key="link.name" :prepend-icon="link.icon" text @click="$router.push(link.path)">
+        <v-btn
+          v-for="link in links"
+          :key="link.name"
+          :prepend-icon="link.icon"
+          text
+          @click="$router.push(link.path)"
+        >
           {{ link.name }}
         </v-btn>
       </v-btn-group>

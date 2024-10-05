@@ -87,12 +87,9 @@ onMounted(() => {
                   </v-col>
                 </v-row>
               </v-sheet>
-              <AnswerEditor :id="question.id"/>
-              
+              <AnswerEditor :id="question.id" />
             </v-card-text>
-            <template v-slot:prepend>
-              
-            </template>
+            <template v-slot:prepend> </template>
           </v-card>
         </v-container>
       </v-col>

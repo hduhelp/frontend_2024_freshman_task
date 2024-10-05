@@ -19,8 +19,8 @@ export const useUserStore = defineStore('user', {
     enabled: true,
     strategies: [
       {
-        key: 'user-data', 
-        storage: localStorage,
+        key: 'user-data',
+        storage: localStorage
       }
     ]
   }

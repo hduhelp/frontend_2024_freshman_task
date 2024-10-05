@@ -5,7 +5,7 @@ import { computed } from 'vue'
 const props = defineProps({
   email: {
     type: String,
-    required: true,
+    required: true
   },
   size: {
     type: [Number, String],

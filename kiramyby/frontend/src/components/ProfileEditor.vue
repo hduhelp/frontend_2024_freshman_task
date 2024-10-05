@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/stores/userStore'
 
 // form status
 const dialog = ref(false)
@@ -28,9 +28,9 @@ const saveForm = () => {
   if (profileForm.value.isValid) {
     dialog.value = false // close dialog
     userStore.setUserData({
-    username: formData.value.username,
-    email: formData.value.email
-  })
+      username: formData.value.username,
+      email: formData.value.email
+    })
   } else {
     alert('Form is invalid!')
   }

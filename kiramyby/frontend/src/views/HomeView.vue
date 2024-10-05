@@ -60,8 +60,8 @@ onMounted(() => {
                 <v-col>
                   <!-- Where Components Insert -->
                   <AvatarGetter :email="userData.email" size="64" />
-                  <div class="text"> {{ userData.username }} </div>
-                  <div class="text"> {{ userData.email }} </div>
+                  <div class="text">{{ userData.username }}</div>
+                  <div class="text">{{ userData.email }}</div>
                   <ProfileEditor />
                 </v-col>
               </v-row>
