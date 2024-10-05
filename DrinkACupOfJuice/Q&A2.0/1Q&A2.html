@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A</title>
+    <style>
+        /* 修正并增强背景样式 */
+        .back {
+            border: 1px solid #008000; /* 边框颜色设置为深绿色 */
+            padding: 20px; /* 添加一些内边距 */
+            margin: 20px; /* 添加外边距 */
+            background-color: #E0F2E0; /* 浅绿色背景 */
+        }
+    
+        /* 修正并设置文本颜色 */
+        .d1 {
+            color: #008000; /* 深绿色文字 */
+        }
+    
+        .d1 img {
+            vertical-align: middle; /* 使图片和文本垂直居中 */
+            margin-right: 10px; /* 图片右侧添加一些间距 */
+            float: left;
+        }
+    
+        .d2, .d3, .d4 {
+            margin-top: 20px; /* 各个部分之间添加顶部间距 */
+        }
+    
+        /* 特定按钮样式 */
+        .d2 button, .d3 button {
+            background-color: #00C853; /* 亮绿色背景 */
+            color: white; /* 白色文字 */
+            border: none; /* 去除边框 */
+            padding: 10px 20px; /* 添加内边距 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            border-radius: 5px; /* 边框圆角 */
+            transition: background-color 0.3s; /* 过渡效果 */
+        }
+    
+        .d2 button:hover, .d3 button:hover {
+            background-color: #00A83B; /* 鼠标悬停时背景色变深 */
+        }
+    
+        /* 输入框样式 */
+        #searchId {
+            padding: 10px; /* 内边距 */
+            border: 1px solid #008000; /* 深绿色边框 */
+            border-radius: 5px; /* 边框圆角 */
+            width: calc(100% - 122px); /* 宽度自适应，减去搜索按钮的宽度和间距 */
+            margin-right: 10px; /* 右侧间距 */
+        }
+    
+        /* 搜索结果和问题列表容器样式 */
+        #questionsAndAnswers, #questionList {
+            margin-top: 20px; /* 顶部间距 */
+            border: 1px solid #008000; /* 深绿色边框 */
+            padding: 10px; /* 内边距 */
+            background-color: #F0FFF0; /* 浅绿色背景 */
+            border-radius: 5px; /* 边框圆角 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back">
+    <div class="d1">
+    <img src="pic\1.jpg" width="40" height="40" title="Q&A" alt="替换文本">
+    <h1>问答平台</h1>
+    </div>
+
+    <div class="d2">
+    <button type="button" onclick="window.location.href='answer.html'">查看全部回答</button>
+    
+    <button onclick="window.location.href='post.html'">新建</button>
+    </div>
+
+    <div class="d3">
+    <input type="text" id="searchId" placeholder="输入问题ID进行搜索...">
+    <button onclick="searchById()">搜索</button>
+    <div id="questionsAndAnswers"></div>
+    </div>
+
+    <div class="d4">
+    <div id="questionList" class="d4"></div>
+    </div>
+    </div>
+
+    <script src="Q&A.js"></script>
+</body>
+
+</html>
