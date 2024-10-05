@@ -280,7 +280,7 @@ storeQuestionDetails(questionData) {
     saveQuestion() {
   const maxId = Math.max(...this.questions.map(q => q.id));
   this.newQuestion.id = maxId + 1;
-  this.newQuestion.created_at = this.getCurrentTime();
+  this.newQuestion.created_at = this.gettime();
   fetch('https://hduhelp.woshiluo.com/api/question', {
     method: 'POST',
     headers: {
@@ -309,7 +309,7 @@ storeQuestionDetails(questionData) {
       this.isEditing=false;
       this.resetProgress();
     },
-    getCurrentTime() {
+    gettime() {
       const now = new Date();
       return now.toISOString(); // 获取当前时间
     }
