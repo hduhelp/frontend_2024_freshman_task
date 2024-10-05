@@ -28,8 +28,8 @@ const saveForm = () => {
   if (profileForm.value.isValid) {
     dialog.value = false // close dialog
     userStore.setUserData({
-      username: computed(() => userData.value.username),
-      email: computed(() => userData.value.email)
+      username: formData.value.username,
+      email: formData.value.email
     })
   } else {
     alert('Form is invalid!')
