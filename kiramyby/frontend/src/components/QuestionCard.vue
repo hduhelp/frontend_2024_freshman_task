@@ -13,10 +13,10 @@ const props = defineProps({
   unsolved: Boolean
 })
 
-const formattedDate = computed(() => {
+const formattedTime = computed(() => {
   if (!props.time) return 'Date???'
   const date = new Date(props.time)
-  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`
 })
 
 const summaryDetail = computed(() => {
@@ -37,7 +37,9 @@ const summaryDetail = computed(() => {
           <AvatarGetter :email="author_email" size="32" />
         </template>
         <v-card-subtitle>
-          {{ `${author} ${formattedDate}` }}
+          {{ $t('author') }}: {{ author }}
+          <br>
+          {{ $t('time') }}: {{ formattedTime }}
         </v-card-subtitle>
       </v-card-item>
       <v-card-text>
@@ -55,7 +57,9 @@ const summaryDetail = computed(() => {
           <AvatarGetter :email="author_email" size="32" />
         </template>
         <v-card-subtitle>
-          {{ `${author} ${formattedDate}` }}
+          {{ $t('author') }}: {{ author }}
+          <br>
+          {{ $t('time') }}: {{ formattedTime }}
         </v-card-subtitle>
       </v-card-item>
       <v-card-text>

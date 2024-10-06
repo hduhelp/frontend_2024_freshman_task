@@ -1,16 +1,54 @@
 <script setup>
 import { RouterView } from 'vue-router'
+import { computed, ref } from 'vue'
+import { useLocale } from 'vuetify'
+import { useI18n } from 'vue-i18n'
 
-const links = [
-  { name: 'home', path: '/home', icon: 'mdi-home-outline' },
-  { name: 'ask', path: '/ask', icon: 'mdi-bell-outline' }
+const { current } = useLocale()
+const { t } = useI18n()
+
+const languageItems = [
+  { text: '中文', value: 'zhHans' },
+  { text: 'English', value: 'en' }
 ]
+
+const i18nSelect = ref(false)
+
+function changeLocale(locale) {
+  current.value = locale
+}
+
+const links = computed(() => [
+  { name: t('home'), path: '/home', icon: 'mdi-home-outline' },
+  { name: t('ask'), path: '/ask', icon: 'mdi-bell-outline' }
+])
 </script>
 
 <template>
   <v-app id="inspire">
     <v-app-bar class="px-3" density="comfortable">
-      <v-app-bar-title>Q&A Platform</v-app-bar-title>
+      <v-app-bar-title>{{ $t('qaPlatform') }}</v-app-bar-title>
+
+      <div class="menu-wrapper">
+        <v-menu v-model="i18nSelect" activator="parent" offset-y>
+          <template v-slot:activator="{ attrs }">
+            <v-btn v-bind="attrs" icon>
+              <v-icon>mdi-translate</v-icon>
+            </v-btn>
+          </template>
+
+          <v-list width="100px">
+            <v-list-item
+              v-for="(item, index) in languageItems"
+              :key="index"
+              @click="changeLocale(item.value)"
+            >
+              <v-list-item-title>{{ item.text }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
+
       <v-btn-group>
         <v-btn
           v-for="link in links"

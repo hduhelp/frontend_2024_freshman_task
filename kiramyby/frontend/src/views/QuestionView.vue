@@ -25,7 +25,7 @@ const question = ref({
   answers: []
 })
 
-const answers = computed(() => question.value.answers)
+const answers = computed(() => (question.value || []).answers)
 
 const fetchQuestionData = async (id) => {
   try {
@@ -48,6 +48,7 @@ onMounted(() => {
     <v-row>
       <v-col>
         <!-- Where Component Insert-->
+         <v-card variant="outlined" :title="$t('question')"></v-card>
         <QuestionCard
           :id="question.id"
           :question="question.title"
@@ -59,6 +60,8 @@ onMounted(() => {
           standard
         >
         </QuestionCard>
+        <v-divider></v-divider>
+        <v-card variant="outlined" :title="$t('answer')"></v-card>
         <AnswerCard
           v-for="answer in answers"
           :key="answer.id"

@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 
+
 // form status
 const dialog = ref(false)
 const profileForm = ref(null)
@@ -28,9 +29,9 @@ const saveForm = () => {
   if (profileForm.value.isValid) {
     dialog.value = false // close dialog
     userStore.setUserData({
-      username: formData.value.username,
-      email: formData.value.email
-    })
+    username: formData.value.username,
+    email: formData.value.email
+  })
   } else {
     alert('Form is invalid!')
   }
@@ -43,7 +44,7 @@ const saveForm = () => {
       <v-btn
         class="text-none font-weight-regular"
         prepend-icon="mdi-account"
-        text="Edit Profile"
+        :text="$t('editProfile')"
         variant="tonal"
         v-bind="activatorProps"
       ></v-btn>

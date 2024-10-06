@@ -1,0 +1,16 @@
+export default {
+    qaPlatform: "问答平台",
+    editProfile: "编辑个人信息",
+    author: "提问者",
+    time: "时间",
+    question: "问题",
+    answer: "回答",
+    answerSubmit: "提交回答",
+    home: "主页",
+    title: "标题",
+    content: "内容",
+    username: "用户名",
+    email:"电子邮件",
+    ask: "提问",
+    askQuestion: "提问",
+}

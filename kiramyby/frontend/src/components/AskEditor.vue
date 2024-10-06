@@ -49,7 +49,7 @@ const submitQuestion = async () => {
           <v-text-field
             disabled
             v-model="userData.username"
-            label="UserName"
+            :label="$t('username')"
             hide-details
           ></v-text-field>
         </v-col>
@@ -58,23 +58,23 @@ const submitQuestion = async () => {
           <v-text-field
             disabled
             v-model="userData.email"
-            label="E-mail"
+            :label="$t('email')"
             hide-details
           ></v-text-field>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="questionContent.title" label="Title" hide-details></v-text-field>
+          <v-text-field v-model="questionContent.title" :label="$t('title')" hide-details></v-text-field>
         </v-col>
       </v-row>
     </v-container>
   </v-form>
   <v-container fluid>
-    <v-textarea v-model="questionContent.detail" label="Content" counter auto-grow></v-textarea>
+    <v-textarea v-model="questionContent.detail" :label="$t('content')" counter auto-grow></v-textarea>
     <div class="pa-4 text-end">
       <v-btn prepend-icon="mdi-upload" color="deep-grey" variant="outlined" @click="submitQuestion"
-        >Ask Question</v-btn
+        >{{ $t("askQuestion") }}</v-btn
       >
     </div>
   </v-container>
