@@ -53,7 +53,7 @@ onMounted(() => {
     <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     <v-row>
       <v-col cols="12" md="3">
-        <v-sheet id="sidebar" rounded="lg">
+        <v-sheet id="sidebar" rounded="lg" elevation="1" border>
           <div class="pa-4 text-center">
             <v-sheet class="d-flex align-center justify-center" height="167px" fluid>
               <v-row>

@@ -1,7 +1,7 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import { computed, ref } from 'vue'
-import { useLocale } from 'vuetify'
+import { useLocale, useTheme } from 'vuetify'
 import { useI18n } from 'vue-i18n'
 
 const { current } = useLocale()
@@ -22,12 +22,19 @@ const links = computed(() => [
   { name: t('home'), path: '/home', icon: 'mdi-home-outline' },
   { name: t('ask'), path: '/ask', icon: 'mdi-bell-outline' }
 ])
+
+const theme = useTheme()
+
+function toggleTheme() {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
 </script>
 
 <template>
   <v-app id="inspire">
     <v-app-bar class="px-3" density="comfortable">
       <v-app-bar-title>{{ $t('qaPlatform') }}</v-app-bar-title>
+      <v-btn @click="toggleTheme" icon><v-icon>mdi-theme-light-dark</v-icon></v-btn>
 
       <div class="menu-wrapper">
         <v-menu v-model="i18nSelect" activator="parent" offset-y>
@@ -69,8 +76,4 @@ const links = computed(() => [
   </v-app>
 </template>
 
-<style scoped>
-.v-main {
-  background-color: rgb(241, 241, 241); /* bg-grey-lighten-3 */
-}
-</style>
+<style scoped></style>
