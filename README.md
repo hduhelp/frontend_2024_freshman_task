@@ -1,8 +1,24 @@
-# frontend_2024_freshman_task
-2024前端二面提交仓库
-- fork本仓库
-- git clone 你 fork 出来的仓库
-- 在仓库根目录下新建一个和你 github 用户名同名的文件夹
-- 在此文件夹内，放入你的代码
-- 提交 Pull request
-- github action通过后，即为提交成功
+# question-vue
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
