@@ -1,0 +1,134 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 150px;
+    color: rgb(39, 175, 213);
+    font: bold 250% Arial, Helvetica, sans-serif;
+    background-image: url("./好帮手.png");
+    background-position: center;
+    background-size: 100px 100px;
+    text-shadow: -10px -10px 10px #000000, 10px 10px 10px #070606, 10px 10px 10px #160af4, 10px 10px 20px #1c09ee;
+}
+.QuestionList-question {
+    padding: 0 20px 20px 20px;
+}
+.css-1cdnuuo {
+    padding: 24px 0px;
+    border-bottom: 1px solid rgb(235, 236, 237);
+    position: relative;
+}
+.css-1qli810 {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(132, 145, 165);
+    font-size: 15px;
+    display: flex;
+}
+.css-1pysja1 {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    flex: 1 1 0%;
+}
+.css-z0zq5j {
+    box-sizing: border-box;
+    margin: 0px 8px 0px 0px;
+    min-width: 0px;
+    display: inline-block;
+    padding: 3px 4px;
+    border: 1px solid rgb(23, 114, 246);
+    background: rgba(23, 114, 246, 0.1);
+    color: rgb(23, 114, 246);
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+}
+.css-zkfaav {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+}
+.css-2wizbk {
+    width: 96px;
+    height: 28px;
+    line-height: 26px;
+    border-radius: 3px;
+    color: rgb(255, 255, 255);
+    padding: 0px;
+    border: 1px solid rgb(23, 114, 246);
+    background-color: rgb(23, 114, 246);
+    box-sizing: border-box;
+}
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 150px;
+    color: rgb(39, 175, 213);
+    font: bold 250% Arial, Helvetica, sans-serif;
+    background-image: url("./好帮手.png");
+    background-position: center;
+    background-size: 100px 100px;
+    text-shadow: -10px -10px 10px #000000, 10px 10px 10px #070606, 10px 10px 10px #160af4, 10px 10px 20px #1c09ee;
+
+}
+.delete-button {
+    float: right; 
+    margin-top: 10px;
+    color: rgb(96, 91, 91);
+    background-color: #f4f5f6; 
+}
+.edit-button {
+    float: right; 
+    margin-top: 10px;
+    color: rgb(96, 94, 94); 
+    background-color: #f4f5f6; 
+}
+.edit-form {
+    width: auto; /* 更改 max-width 为 width，允许表单根据内容自适应宽度 */
+    margin: 1rem auto;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.edit-form label {
+    margin-bottom: 0.5rem;
+}
+
+.edit-form input,
+.edit-form textarea {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.edit-form button {
+    padding: 0.5rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.answer{
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    
+}
