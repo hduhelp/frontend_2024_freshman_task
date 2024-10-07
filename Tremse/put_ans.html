@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改回答</title>
+    <link href="put_ans.css" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <img id="head_hduw" src="materials/HDUHelp.png" width="100"></img>
+        <img id="head_hdun" src="materials/h-l.png" width="50"></img>
+    </div>
+    <form action="/" method="post" id="main" name="main" enctype='application/json'>
+        <div id="page_title">修改回答</div>
+        <label for="auther_name" id="l_author" form="main">作者:</label>
+        <input type="text" id="author_name" name="author_name" form="main" disabled/>
+        <label for="auther_email" id="l_email" form="main">邮箱:</label>
+        <input type="text" id="email" name="author_email" form="main" disabled/>
+        <label for="content" id="l_content" form="main">请描述你的问题:</label>
+        <textarea type="text" id="content" name="content" style="resize: none;" form="main" required="required"></textarea>
+        <input type="text" id="date" name='created_at' hidden=true form="main" value="2024-09-12 12:00:00 "/>
+        <div id="submit">确定</div>
+    </form>
+    <div id="success_container">
+        <img src="materials/1.png" width="200" id="success_png"/>
+        <div id="success_txt">修改成功！</div>
+    </div>
+    <img id="back" src="materials/back.png" width="30" title="返回"/>
+    <script src="put_ans.js"></script>
+</body>
+</html>

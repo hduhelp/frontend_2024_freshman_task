@@ -1,0 +1,82 @@
+#container{
+    display: grid;
+    grid-template-areas: 
+    '. a .'
+    '. b .'
+    '. c .';
+    row-gap: px;
+    justify-items: center;
+}
+#head-title{
+    font-family: '等线';
+    font-weight: lighter;
+    font-size: 50px;
+
+    text-align: center;
+
+    grid-area: b;
+    position: relative;
+    top: 210px;
+
+    text-shadow: 0px 3px 5px rgba(176, 176, 176, 0.697);
+
+    user-select: none;
+}
+#sub-title{
+    font-family: 'Cascadia Code';
+    font-size: 20px;
+
+    width: 70%;
+
+    text-align: center;
+
+    grid-area: a;
+    position: relative;
+    top: 350px;
+
+    text-shadow: 0px 3px 5px rgba(147, 147, 147, 0.295);
+
+    user-select: none;
+}
+#yea{
+    text-align: center;
+
+    position: relative;
+    top: -220px;
+
+    user-select: none;
+}
+#enter{
+    text-align: center;
+    justify-items: center;
+
+    grid-area: c;
+    position: relative;
+    top: 320%;
+    left: -10px;
+
+    user-select: none;
+}
+#enter_button{
+
+    font-family: 'Agency FB';
+    font-size: 50px;
+
+    width: 130%;
+    height: 130%;
+    border-width: 0px;
+    border-radius: 100%;
+
+    background-color: rgba(181, 240, 255, 0.384);
+    box-shadow: 0px 3px 10px rgba(181, 181, 181, 0.46);
+
+    transition: 1s;
+}
+#enter_button:hover{
+    cursor: pointer;
+
+    background-color: rgba(119, 255, 255, 0.522);
+    box-shadow: 0px 3px 10px rgba(53, 52, 52, 0.46),0px 0px 5px rgba(170, 170, 170, 0.181) inset;
+
+    transition: 1s;
+}
