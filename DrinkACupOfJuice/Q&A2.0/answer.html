@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问答平台</title>
+    <style>
+        /* 头部样式 */
+        .header {
+            text-align: center; /* 使内容居中 */
+            margin-bottom: 20px; /* 与下方内容添加底部间距 */
+        }
+
+        .header button {
+            background-color: #00C853; /* 亮绿色背景 */
+            color: white; /* 白色文字 */
+            border: none; /* 去除边框 */
+            padding: 10px 20px; /* 添加内边距 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            border-radius: 5px; /* 边框圆角 */
+            transition: background-color 0.3s; /* 过渡效果 */
+            margin-left: 10px; /* 按钮左侧添加间距 */
+        }
+
+        .header button:hover {
+            background-color: #00A83B; /* 鼠标悬停时背景色变深 */
+        }
+
+        .back {
+            border: 1px solid #008000; /* 边框颜色设置为深绿色 */
+            padding: 20px; /* 添加一些内边距 */
+            margin: 20px; /* 添加外边距 */
+            background-color: #E0F2E0; /* 浅绿色背景 */
+        }
+
+        /* 搜索结果和问题列表容器样式 */
+        #questionsAndAnswers, #questionList {
+            margin-top: 20px; /* 顶部间距 */
+            border: 1px solid #008000; /* 深绿色边框 */
+            padding: 10px; /* 内边距 */
+            background-color: #F0FFF0; /* 浅绿色背景 */
+            border-radius: 5px; /* 边框圆角 */
+            width: 80%; /* 设置宽度为容器宽度的80% */
+            margin: 20px auto; /* 上下外边距，左右自动居中 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back">
+    <div class="header">
+        <h1>回答列表</h1>
+        <button type="button" onclick="window.location.href='1Q&A2.html'">回到主页面</button>
+    </div>
+
+    <div id="questionsAndAnswers"></div>
+
+    </div>
+
+    <script src="answer.js"></script>
+</body>
+
+</html>
