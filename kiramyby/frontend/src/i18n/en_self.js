@@ -1,0 +1,16 @@
+export default {
+    qaPlatform: "Q&A Platform",
+    editProfile: "Edit Profile",
+    author: "author",
+    time: "time",
+    question: "Question",
+    answer: "Answer",
+    answerSubmit: "Submit Answer",
+    home: "Home",
+    title: "Title",
+    content: "Content",
+    username: "Username",
+    email:"E-mail",
+    ask: "Ask",
+    askQuestion: "Ask Question",
+}
