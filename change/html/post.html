@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新建问题</title>
+</head>
+<body>
+    <h1>新建问题</h1>
+    <form id="questionform">
+        <label for="title">问题标题:</label>
+        <input type="text" id="title" placeholder="请输入问题标题"><br>
+        
+        <label for="author">作者:</label>
+        <input type="text" id="author" placeholder="请输入作者"><br>
+        
+        <label for="author_email">邮箱:</label>
+        <input type="email" id="author_email" placeholder="请输入邮箱"><br>
+        
+        <label for="detail">内容:</label>
+        <textarea id="detail" placeholder="请输入内容" rows="4"></textarea><br>
+        
+        <label for="created_at">时间:</label>
+        <input type="datetime-local" id="created_at" placeholder="请输入时间"><br>
+        
+        <button type="button" onclick="post()">提交</button>
+        <button type="reset">重置</button>
+    </form>
+    <script src="js\post.js"></script>
+</body>
+</html>
