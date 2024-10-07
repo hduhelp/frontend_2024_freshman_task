@@ -208,14 +208,6 @@ let allQuestions = [];
                             p5.textContent = questionObj.p5;
                             questionDiv.appendChild(p5);
 
-
-
-                            const a = document.createElement('button');
-                            a.textContent = '查看答案';
-                            a.onclick = function () { const url = `detailanswer.html?id=${id}`; window.location.href = url; };
-
-                            questionDiv.appendChild(a);
-
                             // 将问题添加到问题列表中
                             questionList.appendChild(questionDiv);
 

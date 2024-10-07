@@ -6,11 +6,11 @@ let allQuestions = [];
 
             const questionDiv = document.createElement('div');
 
-            questionDiv.style.backgroundColor = 'white'; // 与页面主题一致的浅绿色背景
-            questionDiv.style.padding = '10px'; // 内边距
-            questionDiv.style.border = '1px solid #008000'; // 深绿色边框
-            questionDiv.style.borderRadius = '5px'; // 边框圆角，与页面其他部分一致
-            questionDiv.style.marginBottom = '10px'; // 底部外边距
+            questionDiv.style.backgroundColor = '#333'; // 深灰色背景
+            questionDiv.style.padding = '10px'; // 内边距保持不变
+            questionDiv.style.border = '1px solid #666'; // 深灰色边框
+            questionDiv.style.borderRadius = '5px'; // 边框圆角保持不变
+            questionDiv.style.marginBottom = '10px'; // 底部外边距保持不变
 
             // 添加ID
             const idElement = document.createElement('h2');
@@ -93,7 +93,7 @@ let allQuestions = [];
 
 
             const a = document.createElement('button');
-            a.textContent = '查看答案';
+            a.textContent = '查看回答';
             a.onclick = function () { const url = `detailanswer.html?id=${id}`; window.location.href = url; };
 
             questionDiv.appendChild(a);
@@ -122,11 +122,12 @@ let allQuestions = [];
                             // 创建一个新的div来包裹每个问题，并添加到问题列表中
                             const questionDiv = document.createElement('div');
 
-                            questionDiv.style.backgroundColor = 'white'; // 与页面主题一致的浅绿色背景
-                            questionDiv.style.padding = '10px'; // 内边距
-                            questionDiv.style.border = '1px solid #008000'; // 深绿色边框
-                            questionDiv.style.borderRadius = '5px'; // 边框圆角，与页面其他部分一致
-                            questionDiv.style.marginBottom = '10px'; // 底部外边距
+                            questionDiv.style.backgroundColor = '#333'; // 深灰色背景
+                            questionDiv.style.padding = '10px'; // 内边距保持不变
+                            questionDiv.style.border = '1px solid #666'; // 深灰色边框
+                            questionDiv.style.borderRadius = '5px'; // 边框圆角保持不变
+                            questionDiv.style.marginBottom = '10px'; // 底部外边距保持不变
+
                             
 
 
@@ -207,14 +208,6 @@ let allQuestions = [];
                             const p5 = document.createElement('p');
                             p5.textContent = questionObj.p5;
                             questionDiv.appendChild(p5);
-
-
-
-                            const a = document.createElement('button');
-                            a.textContent = '查看答案';
-                            a.onclick = function () { const url = `detailanswer.html?id=${id}`; window.location.href = url; };
-
-                            questionDiv.appendChild(a);
 
                             // 将问题添加到问题列表中
                             questionList.appendChild(questionDiv);

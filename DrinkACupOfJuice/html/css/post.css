@@ -1,0 +1,87 @@
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f2e1; /* 浅绿色背景 */
+    color: #333; /* 字体颜色为深灰色，以便与绿色背景形成对比 */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 表单样式 */
+#questionform {
+    background-color: #fff; /* 表单背景为白色 */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+    width: 100%;
+    max-width: 600px; /* 限制表单的最大宽度 */
+}
+
+/* 输入框和文本域样式 */
+#questionform input[type="text"],
+#questionform input[type="email"],
+#questionform input[type="datetime-local"],
+#questionform textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #8bc34a; /* 绿色边框 */
+    border-radius: 4px;
+    box-sizing: border-box; /* 使得padding和border包含在width内 */
+}
+
+/* 按钮样式 */
+#questionform button {
+    background-color: #4CAF50; /* 深绿色背景 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s; /* 平滑的背景色过渡效果 */
+}
+
+#questionform button:hover {
+    background-color: #45a049; /* 鼠标悬停时背景色稍深 */
+}
+
+/* 重置按钮样式 */
+#questionform button[type="reset"] {
+    background-color: #f44336; /* 红色背景，以区分提交按钮 */
+    color: white;
+}
+
+#questionform button[type="reset"]:hover {
+    background-color: #e53935; /* 鼠标悬停时背景色稍深 */
+}
+
+/* 标题样式 */
+h1 {
+    color: #4CAF50; /* 深绿色标题 */
+    text-align: center;
+}
+
+/* 标签样式（可选） */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666; /* 灰色标签，与绿色形成对比 */
+}
+button {
+    background-color: #00C853; /* 亮绿色背景 */
+    color: white; /* 白色文字 */
+    border: none; /* 去除边框 */
+    padding: 10px 20px; /* 添加内边距 */
+    cursor: pointer; /* 鼠标悬停时显示指针 */
+    border-radius: 5px; /* 边框圆角 */
+    transition: background-color 0.3s; /* 过渡效果 */
+}

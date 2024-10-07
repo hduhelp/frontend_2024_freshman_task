@@ -30,9 +30,10 @@ function createQuestionAndAnswersContainer(questionObj) {
 
     // 创建问题部分
     const questionDiv = document.createElement('div');
-    questionDiv.style.backgroundColor = 'white';
+    questionDiv.style.backgroundColor = '#333'; // 深灰色背景
+    questionDiv.style.color = '#ccc'; // 浅灰色文字（如果需要的话）
     questionDiv.style.padding = '10px';
-    questionDiv.style.border = '1px solid #008000';
+    questionDiv.style.border = '1px solid #666'; // 深灰色边框（与背景形成对比）
     questionDiv.style.borderRadius = '5px';
 
     const idElement = document.createElement('h3');
@@ -48,11 +49,12 @@ function createQuestionAndAnswersContainer(questionObj) {
     // 创建答案部分
     const answersDiv = document.createElement('div');
     answersDiv.className = 'answers';
-    answersDiv.style.backgroundColor = '#f9f9f9'; // 浅灰色背景，以便与问题部分区分
+    answersDiv.style.backgroundColor = '#333'; // 深灰色背景
     answersDiv.style.padding = '10px';
-    answersDiv.style.border = '1px solid #ccc';
+    answersDiv.style.border = '1px solid #666'; // 深灰色边框
     answersDiv.style.borderRadius = '5px';
     answersDiv.style.marginTop = '10px';
+    answersDiv.style.color = '#ccc'; // 浅灰色文字，确保内容清晰可见
 
     questionObj.answers.forEach(answerObj => {
         const answerDiv = document.createElement('div');
@@ -63,13 +65,14 @@ function createQuestionAndAnswersContainer(questionObj) {
         detailDiv.style.padding = '5px';
 
         // 添加答案ID
+        let id=answerObj.id;
         const aidElement = document.createElement('p');
-        aidElement.textContent = '答案ID: ' + answerObj.id;
+        aidElement.textContent = '回答ID: ' + answerObj.id;
         detailDiv.appendChild(aidElement);
 
         // 添加答案作者
         const authorElement = document.createElement('p');
-        authorElement.textContent = '答案作者: ' + answerObj.author_name;
+        authorElement.textContent = '回答作者: ' + answerObj.author_name;
         detailDiv.appendChild(authorElement);
 
         // 添加作者email（可选）
@@ -89,10 +92,24 @@ function createQuestionAndAnswersContainer(questionObj) {
         timeElement.textContent = '回答时间: ' + answerObj.created_at;
         detailDiv.appendChild(timeElement);
 
+        // 创建一个按钮元素
+        const detailElement = document.createElement('button');
+        detailElement.textContent = '查看详细内容';
+
+        // 为按钮添加点击事件监听器
+        detailElement.addEventListener('click', function() {
+        // 构造包含答案ID的URL
+        const detailUrl = `detailanswern.html?id=${encodeURIComponent(answerObj.id)}`;
+        // 更改当前页面的URL以导航到detailnanswer.html，并传递答案ID作为查询参数
+        window.location.href = detailUrl;
+        });
+
+        detailDiv.appendChild(detailElement);
+
         answerDiv.appendChild(detailDiv);
         answersDiv.appendChild(answerDiv);
-    });
+        });
 
-    qaContainer.appendChild(answersDiv);
-    return qaContainer;
+        qaContainer.appendChild(answersDiv);
+        return qaContainer;
 }

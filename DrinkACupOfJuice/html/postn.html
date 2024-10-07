@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新建问题</title>
+    <link rel="stylesheet" href="cssn/postn.css">
 </head>
 <body>
     <h1>新建问题</h1>
+    <button onclick="window.location.href='post.html'">日间模式</button>
+    <button onclick="window.location.href='../1Q&A2n.html'">返回</button>
     <form id="questionform">
         <label for="title">问题标题:</label>
         <input type="text" id="title" placeholder="请输入问题标题"><br>
@@ -26,6 +29,6 @@
         <button type="button" onclick="post()">提交</button>
         <button type="reset">重置</button>
     </form>
-    <script src="js\post.js"></script>
+    <script src="jsn\postn.js"></script>
 </body>
 </html>
