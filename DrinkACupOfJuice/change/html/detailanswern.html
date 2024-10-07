@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问答平台</title>
+    <link rel="stylesheet" href="cssn\detailanswern.css">
+</head>
+<body>
+    <div class="container">
+        <img src="pic\1.jpg" width="40" height="40" title="Q&A" alt="替换文本">
+        <button type="button" onclick="window.location.href='answern.html'">查看全部回答</button>
+        <div class="search-container"></div>
+            <input type="text" id="searchId" placeholder="输入答案ID进行搜索...">
+            <button onclick="searchById()">搜索</button>
+        </div>
+        <div id="questionsAndAnswers" class="question-container"></div>
+    </div>
+    <script src="jsn/detailanswern.js"></script>
+</body>
+</html>

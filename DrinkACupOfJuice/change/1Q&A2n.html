@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A</title>
+    <link rel="stylesheet" href="html\cssn\1Q&A2n.css">
+</head>
+
+<body>
+    <div class="back">
+    <div class="d1">
+    <img src="html\pic\1.jpg" width="40" height="40" title="Q&A" alt="替换文本">
+    <h1>问答平台</h1>
+    </div>
+
+    <div class="d2">
+    <button type="button" onclick="window.location.href='html/answern.html'">查看全部回答</button>
+    
+    <button onclick="window.location.href='htmln/postn.html'">新建</button>
+    <button onclick="window.location.href='1Q&A2.html'">日间模式</button>
+    </div>
+
+    <div class="d3">
+    <input type="text" id="searchId" placeholder="输入问题ID进行搜索...">
+    <button onclick="searchById()">搜索</button>
+    <div id="questionsAndAnswers"></div>
+    </div>
+
+    <div class="d4">
+    <div id="questionList" class="d4"></div>
+    </div>
+    </div>
+
+    <script src="html\jsn\1Q&A2n.js"></script>
+</body>
+
+</html>
