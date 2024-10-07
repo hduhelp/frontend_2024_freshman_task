@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>杭助问答</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="header">
+    <div class="inner-header">
+      <button id="backButton" style="display:none;">返回</button>
+      <h1><a href="#">杭助问答</a></h1>
+      <div class="search">
+        <input type="text" id="searchKeyword">
+        <button id="searchButton" onclick="goToTop()">搜索</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper">
+    <div id="list"></div>
+    <div id="loader" style="display: none;">加载中...</div>
+    <div id="right">
+      <div class="createQuestion">
+        <h2>创建问题</h2>
+        <form id="createQuestionForm">
+          <label for="title">问题标题：</label>
+          <input type="text" id="title" required><br>
+          <label for="detail">问题详情：</label><br>
+          <textarea id="detail" required></textarea><br>
+          <label for="author">作者：</label><br>
+          <input type="text" id="author" required><br>
+          <label for="authorEmail">作者邮箱：</label>
+          <input type="email" id="authorEmail" required><br>
+          <input type="submit" value="提交问题">
+        </form>
+      </div>
+      <div class="modifyQuestion">
+        <h2>修改问题</h2>
+        问题ID：<input type="number" id="modifyQuestionIdInput"><br>
+        <form id="modifyQuestionForm">
+          <label for="newTitle">标题：</label><br>
+          <input type="text" id="newTitle" required><br>
+          <label for="newDetail">详情：</label><br>
+          <textarea id="newDetail" required></textarea><br>
+          <input type="submit" value="提交修改">
+        </form>
+      </div>
+      <div class="deleteQuestion">
+        <h2>删除问题</h2>
+        问题ID：<input type="number" id="deleteQuestionIdInput"><br>
+        <input type="submit" id="deleteButton" value="删除问题">
+      </div>
+      <div class="createAnswer">
+        <h2>创建答案（通过id）</h2>
+        <form id="createAnswerForm">
+          <label for="questionIdAnswer">问题ID：</label>
+          <input type="number" id="questionIdAnswer" required><br>
+          <label for="answerContent">答案内容：</label><br>
+          <textarea id="answerContent" required></textarea><br>
+          <label for="answerAuthor">答案作者：</label>
+          <input type="text" id="answerAuthor" required><br>
+          <label for="answerAuthorEmail">答案作者邮箱：</label>
+          <input type="email" id="answerAuthorEmail" required><br>
+          <input type="submit" value="提交答案">
+        </form>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+<script>
+  // 显示所有问题及其答案
+  document.addEventListener('DOMContentLoaded', function () {
+    const questionListDiv = document.getElementById('list');
+    const loader = document.getElementById('loader');
+    let page = 1;
+    let isLoading = false;
+    const limit = 5;
+    const loadedQuestionIds = []; // 存储已加载问题的id
+
+    // 加载问题的函数
+    function loadQuestions() {
+      if (isLoading) {
+        return;
+      }
+      isLoading = true;
+      loader.style.display = 'block';
+
+      fetch(`https://hduhelp.woshiluo.com/api/question?page=${page}&limit=${limit}`)
+        .then(response => response.json())
+        .then(questions => {
+          if (questions.length === 0) {
+            loader.style.display = 'none';
+            return;
+          }
+
+          questions.forEach(question => {
+            if (loadedQuestionIds.includes(question.id)) {
+              return; // 如果问题已加载，跳过
+            }
+            const questionDiv = document.createElement('div');
+            questionDiv.innerHTML = `
+                                <p class="small">问题ID: ${question.id}</p>
+                                <h3>${question.title}</h3>
+                                <p>详情: ${question.detail}</p>
+                                <p class="small">作者: ${question.author}</p>
+                                <p class="gray">创建时间: ${question.created_at}</p>
+                                <p class="gray">作者邮箱: ${question.author_email}</p>
+                                <br>
+                                <h4>答案：</h4>
+                            `;
+            const expandButton = document.createElement('button');
+            expandButton.textContent = '展开答案';
+            expandButton.dataset.questionId = question.id;
+            expandButton.onclick = function () {
+              const questionId = this.dataset.questionId;
+              const answerDivs = questionDiv.querySelectorAll('.answerDiv');
+              const isExpanded = answerDivs[0].style.display === 'block';
+              answerDivs.forEach(function (answerDiv) {
+                answerDiv.style.display = isExpanded ? 'none' : 'block';
+              });
+              this.textContent = isExpanded ? '展开答案' : '折叠答案';
+            };
+            questionDiv.appendChild(expandButton);
+
+            // 加载答案
+            loadAnswers(question.id, questionDiv);
+            questionListDiv.appendChild(questionDiv);
+            loadedQuestionIds.push(question.id);
+            questionListDiv.appendChild(document.createElement('br'));
+            questionListDiv.appendChild(document.createElement('hr'));
+            questionListDiv.appendChild(document.createElement('br'));
+          });
+
+          page++;
+          isLoading = false;
+          loader.style.display = 'none';
+        });
+    }
+
+    // 加载答案的函数
+    function loadAnswers(questionId, container) {
+      fetch(`https://hduhelp.woshiluo.com/api/question/${questionId}/answer`)
+        .then(response => response.json())
+        .then(answers => {
+          if (answers.length === 0) {
+            const noAnswerDiv = document.createElement('div');
+            noAnswerDiv.textContent = '暂无答案';
+            container.appendChild(noAnswerDiv);
+          } else {
+            answers.forEach(answer => {
+              const answerDiv = document.createElement('div');
+              answerDiv.className = 'answerDiv';
+              answerDiv.innerHTML = `
+                                    <p class="small">答案ID: ${answer.id}</p>
+                                    <p>内容: ${answer.content}</p>
+                                    <p class="small">作者: ${answer.author_name}</p>
+                                    <p class="gray">创建时间: ${answer.created_at}</p>
+                                    <p class="gray">作者邮箱: ${answer.author_email}</p>
+                                    <p>是否最佳答案: ${answer.is_best}</p>
+                                    <br>
+                                `;
+              container.appendChild(answerDiv);
+            });
+          }
+        });
+    }
+
+    // 初始加载部分问题
+    loadQuestions();
+
+    questionListDiv.addEventListener('scroll', function () {
+      if (questionListDiv.scrollTop + questionListDiv.clientHeight >= questionListDiv.scrollHeight - 10) {
+        loadQuestions();
+      }
+    });
+  });
+
+
+
+  // 根据关键词搜索问题及其答案
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchQuestionsButton = document.getElementById('searchButton');
+    const searchResultDiv = document.getElementById('list');
+    const backButton = document.getElementById('backButton');
+    searchQuestionsButton.addEventListener('click', function () {
+      const keyword = document.getElementById('searchKeyword').value;
+      fetch('https://hduhelp.woshiluo.com/api/question')
+        .then(response => response.json())
+        .then(questions => {
+          const filteredQuestions = questions.filter(question => {
+            return question.title.includes(keyword) || question.detail.includes(keyword);
+          });
+          searchResultDiv.innerHTML = '';
+          filteredQuestions.forEach(question => {
+            const questionDiv = document.createElement('div');
+            questionDiv.innerHTML = `
+                               <p class="small">问题ID: ${question.id}</p>
+                               <h3>${question.title}</h3>
+                               <p>详情: ${question.detail}</p>
+                               <p class="small">作者: ${question.author}</p>
+                               <p class="gray">创建时间: ${question.created_at}</p>
+                               <p class="gray">作者邮箱: ${question.author_email}</p>
+                               <br>
+                               <h4>答案：</h4>
+                           `;
+            const answerUrl = `https://hduhelp.woshiluo.com/api/question/${question.id}/answer`;
+            fetch(answerUrl)
+              .then(answerResponse => answerResponse.json())
+              .then(answers => {
+                if (answers.length > 0) {
+                  answers.forEach(answer => {
+                    const answerDiv = document.createElement('div');
+                    answerDiv.innerHTML = `
+                                                 <p class="small">答案ID: ${answer.id}</p>
+                                                 <p>内容: ${answer.content}</p>
+                                                 <p class="small">作者: ${answer.author_name}</p>
+                                                 <p class="gray">创建时间: ${answer.created_at}</p>
+                                                 <p class="gray">作者邮箱: ${answer.author_email}</p>
+                                                 <p>是否最佳答案: ${answer.is_best}</p>
+                                                 <br>
+                                             `;
+                    questionDiv.appendChild(answerDiv);
+                  });
+                } else {
+                  const noAnswerDiv = document.createElement('div');
+                  noAnswerDiv.textContent = '暂无答案';
+                  questionDiv.appendChild(noAnswerDiv);
+                }
+                searchResultDiv.appendChild(questionDiv);
+                searchResultDiv.appendChild(document.createElement('br'));
+                searchResultDiv.appendChild(document.createElement('hr'));
+                searchResultDiv.appendChild(document.createElement('br'));
+              });
+          });
+          backButton.style.display = 'inline-block';// 搜索完成后显示返回按钮
+        });
+    });
+  });
+
+
+  // 返回按钮点击事件
+  backButton.addEventListener('click', function () {
+    location.reload();
+  });
+
+
+  // 页面回到顶部
+  function goToTop() {
+    window.scrollTo(0, 0);
+  }
+
+
+  // 创建新问题
+  const createQuestionForm = document.getElementById('createQuestionForm');
+  createQuestionForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const detail = document.getElementById('detail').value;
+    const author = document.getElementById('author').value;
+    const authorEmail = document.getElementById('authorEmail').value;
+    const newQuestion = {
+      title: title,
+      detail: detail,
+      author: author,
+      created_at: new Date().toISOString(),
+      author_email: authorEmail,
+      answers: []
+    };
+    fetch('https://hduhelp.woshiluo.com/api/question', {
+      method: 'POST',
+      // headers: {
+      //   'Content - Type': 'application/json'
+      // },
+      body: JSON.stringify(newQuestion)
+    }).then(response => {
+      if (response.ok) {
+        alert('问题创建成功');
+        // 可以在这里刷新问题列表
+        location.reload();
+      } else {
+        alert('问题创建失败');
+      }
+    });
+  });
+
+
+  // 修改问题
+  document.getElementById('modifyQuestionForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const questionId = document.getElementById('modifyQuestionIdInput').value;
+    const newTitle = document.getElementById('newTitle').value;
+    const newDetail = document.getElementById('newDetail').value;
+    const modifiedQuestion = {
+      title: newTitle,
+      detail: newDetail,
+      answers: []
+    };
+    fetch(`https://hduhelp.woshiluo.com/api/question/${questionId}`, {
+      method: 'PUT',
+      // headers: {
+      //   'Content - Type': 'application/json'
+      // },
+      body: JSON.stringify(modifiedQuestion)
+    }).then(response => {
+      if (response.ok) {
+        alert('问题修改请求已发送');
+      } else {
+        alert('问题修改请求失败');
+      }
+    });
+  });
+
+
+  // 删除问题
+  document.getElementById('deleteButton').addEventListener('click', function (e) {
+    e.preventDefault();
+    const questionId = document.getElementById('deleteQuestionIdInput').value;
+
+    if (questionId) {
+      fetch(`https://hduhelp.woshiluo.com/api/question/${questionId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          alert('问题删除成功');
+          location.reload(); // 刷新页面以更新问题列表
+        } else {
+          alert('删除问题失败: ' + response.statusText);
+        }
+      }).catch(error => {
+        alert('网络错误，请重试: ' + error.message);
+      });
+    } else {
+      alert('请输入有效的问题ID');
+    }
+  });
+
+
+  // 为问题创建答案
+  const createAnswerForm = document.getElementById('createAnswerForm');
+  createAnswerForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const questionId = document.getElementById('questionIdAnswer').value;
+    const answerContent = document.getElementById('answerContent').value;
+    const answerAuthor = document.getElementById('answerAuthor').value;
+    const answerAuthorEmail = document.getElementById('answerAuthorEmail').value;
+    const newAnswer = {
+      content: answerContent,
+      created_at: new Date().toISOString(),
+      author_email: answerAuthorEmail,
+      author_name: answerAuthor,
+      question_id: questionId,
+      is_best: undefined
+    };
+    fetch(`https://hduhelp.woshiluo.com/api/question/${questionId}/answer`, {
+      method: 'POST',
+      headers: {
+        'Content - Type': 'application/json'
+      },
+      body: JSON.stringify(newAnswer)
+    }).then(response => {
+      if (response.ok) {
+        alert('答案创建成功');
+        // 可以在这里刷新问题的答案显示
+        const questionIdForRefresh = document.getElementById('questionId').value;
+        if (questionIdForRefresh === questionId) {
+          getQuestionByIdButton.click();
+        }
+      } else {
+        alert('答案创建失败');
+      }
+    });
+  });
+
+</script>
+
+</html>
